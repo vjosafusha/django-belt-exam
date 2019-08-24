@@ -23,7 +23,7 @@
                 </div>
                 <div class="six columns">
                     <a href="{% url 'users:logout' %}" class="button button-primary">LOGOUT</a>
-                    <a href="{% url 'jobs:all_jobs' %}" class="button">BACK</a>
+                    <a href="{% url 'jobs:all' %}" class="button">BACK</a>
                 </div>          
         </div>
         <div class="job-details">
@@ -32,7 +32,7 @@
             <p>Posted By: {{job_by_id.creator.first_name}} {{job_by_id.creator.last_name}}</p>
             <p>Created on: {{job_by_id.created_at}}</p>
         </div>
-        <h5><a href="{% url 'jobs:join_job' job_by_id.id %}"class="button">Add To My Jobs</a></h5>
+        <h5><a href="{% url 'jobs:join' job_by_id.id %}"class="button">Add To My Jobs</a></h5>
     </div>
 </body>
 </html>

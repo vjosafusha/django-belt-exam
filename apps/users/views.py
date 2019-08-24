@@ -14,7 +14,7 @@ def create(request):
     user_id = User.objects.easy_create(request.POST)
     print(user_id)
     request.session['user_id'] = user_id    
-    return redirect ('jobs:all_jobs')
+    return redirect ('jobs:all')
 
 def login(request):
     valid, result = User.objects.login(request.POST)
@@ -22,7 +22,7 @@ def login(request):
         messages.error(request, result)
         return redirect('users:index')
     request.session['user_id'] = result
-    return redirect('jobs:all_jobs')
+    return redirect('jobs:all')
 
 def logout(request):
     request.session.clear()

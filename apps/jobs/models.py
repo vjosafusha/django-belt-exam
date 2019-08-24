@@ -27,18 +27,18 @@ class JobManager(models.Manager):
 
     def easy_create(self, form, id, loc_id):
         user = User.objects.filter(id = id)
-        locat = Location.objects.filter(id = loc_id)
+        location = Location.objects.filter(id = loc_id)
         Job.objects.create(
             title = form['title'],
             description = form['description'],
             creator = user[0],
-            location = locat[0]           
+            location = location[0]           
         )
 
     def job_join(self, user_id, job_id):
         user = User.objects.get(id = user_id)
         job = Job.objects.get(id = job_id)
-        job.seekers.add(user)
+        job.joined_by.add(user)
         job.save()
         
 
@@ -46,8 +46,8 @@ class Job(models.Model):
     title = models.CharField(max_length = 255)
     description = models.TextField()
     creator = models.ForeignKey(User, related_name = 'jobs')
-    seekers = models.ManyToManyField(User, related_name = 'the_jobs')
-    location = models.ForeignKey(Location, related_name = 'job_placements')
+    joined_by = models.ManyToManyField(User, related_name = 'the_jobs')
+    location = models.ForeignKey(Location, related_name = 'job_address')
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
     

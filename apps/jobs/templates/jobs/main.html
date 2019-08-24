@@ -24,7 +24,7 @@
             </div>
             <div class="six columns">
                 <a href="{% url 'users:logout' %}" class="button button-primary">LOGOUT</a>
-                <a href="{% url 'jobs:add_job' %}" class="button">Add a Job</a>
+                <a href="{% url 'jobs:add' %}" class="button">Add a Job</a>
 
             </div>
         </div>
@@ -43,10 +43,10 @@
                         <td>{{job.title}}</td>
                         <td>{{job.location.address}}</td>
                         <td>
-                            <a href="{% url 'jobs:show_job' job.id %}" class="button">View</a>
-                            <a href="{% url 'jobs:join_job' job.id %}" class="button button-primary">Add</a>
+                            <a href="{% url 'jobs:show' job.id %}" class="button">View</a>
+                            <a href="{% url 'jobs:join' job.id %}" class="button button-primary">Add</a>
                             {% if job.creator.id == user_by_id.id %}
-                                <a href="{% url 'jobs:edit_job' job.id %}" class="button">Edit</a>
+                                <a href="{% url 'jobs:edit' job.id %}" class="button">Edit</a>
                                 <a href="{% url 'jobs:cancel' job.id %}" class="button">Cancel</a>
                             {% endif %}
                         </td>
@@ -69,7 +69,7 @@
                     <tr>
                         <td>{{ job.title }}</td>
                         <td>
-                            <a href="{% url 'jobs:show_job' job.id %}" class="button">View</a>
+                            <a href="{% url 'jobs:show' job.id %}" class="button">View</a>
                             <a href="{% url 'jobs:cancel' job.id %}" class="button">Done</a>
                         </td>
                     </tr>

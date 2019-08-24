@@ -15,7 +15,7 @@
             </div>
             <div class="six columns">
                 <a href="{% url 'users:logout' %}" class="button button-primary">LOGOUT</a>
-                <a href="{% url 'jobs:all_jobs' %}" class="button">Back</a>
+                <a href="{% url 'jobs:all' %}" class="button">Back</a>
             </div>
         </div>
         {% if messages %}
@@ -25,7 +25,7 @@
         {% endfor %}
         </ul>
         {% endif %} 
-        <form action="{% url 'jobs:create_job' %}" method="post">
+        <form action="{% url 'jobs:create' %}" method="post">
             {% csrf_token %}
             <label for="title">Title:</label>
             <input type="text" name="title">
