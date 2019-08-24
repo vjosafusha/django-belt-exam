@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" />
+    <title>Home Page</title>
+    <style>
+        hr { 
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            border-style: inset;
+            border-width: 3px;
+        }         
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="six columns">
+                <h2>Welcome {{user_by_id.first_name}}!</h2>
+            </div>
+            <div class="six columns">
+                <a href="{% url 'users:logout' %}" class="button button-primary">LOGOUT</a>
+                <a href="{% url 'jobs:add_job' %}" class="button">Add a Job</a>
+
+            </div>
+        </div>
+        <div class="all_jobs">
+            <table class="u-full-width">
+                <thead>
+                    <tr>
+                        <th>Job</th>
+                        <th>Location</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for job in all_jobs %}
+                    <tr>
+                        <td>{{job.title}}</td>
+                        <td>{{job.location.address}}</td>
+                        <td>
+                            <a href="{% url 'jobs:show_job' job.id %}" class="button">View</a>
+                            <a href="{% url 'jobs:join_job' job.id %}" class="button button-primary">Add</a>
+                            {% if job.creator.id == user_by_id.id %}
+                                <a href="{% url 'jobs:edit_job' job.id %}" class="button">Edit</a>
+                                <a href="{% url 'jobs:cancel' job.id %}" class="button">Cancel</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>   
+            </table>
+        </div>
+        <hr noshade> 
+        <div class="my_jobs">
+            <table class="u-full-width">
+                <thead>
+                    <tr>
+                        <th>My Jobs</th>
+                        <th>...</th>
+                    </tr>              
+                </thead>
+                <tbody>
+                    {% for job in my_jobs %}
+                    <tr>
+                        <td>{{ job.title }}</td>
+                        <td>
+                            <a href="{% url 'jobs:show_job' job.id %}" class="button">View</a>
+                            <a href="{% url 'jobs:cancel' job.id %}" class="button">Done</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+    
+</body>
+</html>

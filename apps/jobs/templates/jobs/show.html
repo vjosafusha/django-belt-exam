@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" />
+    <title>{{job_by_id.title}} Job Details</title>
+    <style>
+        .job-details{
+            display: inline-block;
+            border: 2px solid grey;
+            font-size: 30px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+                <div class="six columns">
+                    <h5>Job Title  - {{job_by_id.title}}</h5>
+                </div>
+                <div class="six columns">
+                    <a href="{% url 'users:logout' %}" class="button button-primary">LOGOUT</a>
+                    <a href="{% url 'jobs:all_jobs' %}" class="button">BACK</a>
+                </div>          
+        </div>
+        <div class="job-details">
+            <p>Job Description: {{job_by_id.description}}</p>
+            <p>Location : {{job_by_id.location.address}}</p>
+            <p>Posted By: {{job_by_id.creator.first_name}} {{job_by_id.creator.last_name}}</p>
+            <p>Created on: {{job_by_id.created_at}}</p>
+        </div>
+        <h5><a href="{% url 'jobs:join_job' job_by_id.id %}"class="button">Add To My Jobs</a></h5>
+    </div>
+</body>
+</html>
