@@ -38,8 +38,8 @@ class UserManager(models.Manager):
         existing_user = User.objects.filter(email = form['email'])
         if existing_user:
             user = existing_user[0]
-            bcrypt.checkpw(form['password'].encode(), user.pw_hash.encode())
-            return(True, user.id)
+            if bcrypt.checkpw(form['password'].encode(), user.pw_hash.encode()):
+                return(True, user.id)
         return(False, 'Email or password invalid')
 
 class User(models.Model):
